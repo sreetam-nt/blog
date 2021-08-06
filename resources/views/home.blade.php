@@ -44,8 +44,8 @@
                     </div>
 
                     <div class="card-body">
-                        @foreach($data as $inf)
-                        <table style="width: 100%;">
+                        @foreach($tag as $inf)
+                        <table style="width: 100%;" class="table">
                             <tr>
                                 <td> <a href="">{{$inf->tname}}</a></td>
 
@@ -94,7 +94,7 @@
                                             <div class="mb-3">
                                                 <label class="form-label">Post Tags :</label>
 
-                                                @foreach($data as $inf)
+                                                @foreach($tag as $inf)
                                                 <input type="checkbox" name="tagsel[]" value="{{$inf->id}}">
                                                 {{$inf->tname}}
                                                 @endforeach
@@ -117,6 +117,16 @@
                     </div>
 
                     <div class="card-body">
+                        @foreach($post as $show)
+                        <div class="card" style="width: 100%; height:300px">
+                        <a href="/edit/{{$show->id}}"><img src="{{ asset('storage/'.$show->image) }}" class="card-img-top " alt="image" width="100%" height="200px"></a>
+                        
+                            <div class="card-body">
+                                <span class="card-text">Posted By: &nbsp; {{$show->user->name}}</span>
+                                <span class="card-text" style="float: right;">{{$show->created_at}}</span>
+                            </div>
+                        </div>
+                        @endforeach
 
                     </div>
                 </div>

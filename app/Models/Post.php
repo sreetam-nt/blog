@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
+use App\Models\Tag;
 
 class Post extends Model
 {
@@ -15,5 +17,21 @@ class Post extends Model
         'desc',
         'image','tag_id','comment_id','users_id','id'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class,'users_id','id');
+    }
+
+
+    public function tag()
+    {
+        return $this->belongsTo(Tag::class);
+    }
+    // public function comment()
+    // {
+    //     return $this->belongsTo(Comment::class);
+    // }
+
 
 }

@@ -44,12 +44,12 @@ class PostController extends Controller
 
             // if($validatedData){
 
-                $name = $request->file('image')->getClientOriginalName();
+                // $name = $request->file('image')->getClientOriginalName();
 
-                $path = $request->file('image')->storeAs('public/images',$name);
+                $name = $request->image->store('images','public');
         
                 $tag = $request->tagsel;
-                $tags = implode(',',$tag);
+                $tags = implode(" ",$tag);
         
                         Post::Create(
                     
@@ -93,7 +93,9 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = Post::find($id);
+        return view('post',compact('data'));
+    
     }
 
     /**

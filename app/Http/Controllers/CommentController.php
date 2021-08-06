@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Comment;
+use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
@@ -34,7 +36,10 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Comment::create(['cname'=>$request->comment,
+        'users_id' =>Auth::user()->id]);
+
+        return redirect('post');
     }
 
     /**
