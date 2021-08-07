@@ -44,15 +44,20 @@
                     </div>
 
                     <div class="card-body">
+                    <table style="width: 100%;" class="table">
+                    <tr>
+                                <td> <a href="/home">All Posts</a></td>
+                    </tr>
                         @foreach($tag as $inf)
-                        <table style="width: 100%;" class="table">
+                        
                             <tr>
                                 <td> <a href="/tag/{{$inf->id}}">{{$inf->tname}}</a></td>
 
                                 <td style="text-align: right;"><a href="/delete/{{$inf->id}}" class="btn-close" aria-label="Close"></a></td>
                             </tr>
-                        </table>
+                       
                         @endforeach
+                        </table>
 
                     </div>
                 </div>

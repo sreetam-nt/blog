@@ -97,10 +97,10 @@ class PostController extends Controller
     {
         $data = Post::find($id);
         $tags = explode(",",$data->tag_id);
-        return $tags;
+        // return $tags;
          
-        // $comment = Comment::where('postid',$id)->get();
-        // return view('post',compact('data','comment','tags'));
+        $comment = Comment::where('postid',$id)->get();
+        return view('post',compact('data','comment','tags'));
     
     }
 
