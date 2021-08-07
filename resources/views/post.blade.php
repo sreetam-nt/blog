@@ -11,21 +11,37 @@
 
 <body>
     <div class="container" style="margin-top: 20px;">
-    <form method="Post" action="/comment">
+    <form method="Post" action="/comment/{{$data->id}}">
        @csrf
+      <a href="/home">Back</a><br>
         <div class="card" style="width:500px;">
             
             <img src="{{ asset('storage/'.$data->image) }}" class="card-img-top" alt="image" width="100%" height="200px">
-            <span class="card-text">{{$data->user->name}}</span>
-            <span >Posted At: </span>
-            <span>{{$data->created_at}}</span>
+            
+            <p>
+            <h4 class="card-title">{{$data->user->name}}</h4>
+            <span style="float: right;">Posted At: </span><br>
+            <span style="float: right;">{{$data->created_at}}</span>
+
+            </p>
+            
             <div class="card-body">
                 <h4 class="card-title">Description</h4>
                 <p class="card-text">{{$data->desc}}</p>
                 <h4 class="card-title">Tags</h4>
+                
+              
                 <p class="card-text">{{$data->tag->tname}}</p>
+
+         
+               
                 <h4 class="card-title">Comments</h4>
-                <p class="card-text">{{$data->userc->name}}</p>
+                
+                @foreach($comment as $cmt)
+                <p class="card-text">{{$cmt->userc->name}} : <span>{{$cmt->cname}}</span>
+                <span style="float:right">{{$cmt->created_at}}</span>
+            </p>
+                @endforeach
                 <label>Comment : </label><br>
                <input type="text" name="comment" style="padding: 10px;">
               <input type="submit" value="Reply">

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Comment;
+use App\Models\Tag;
 
 class PostController extends Controller
 {
@@ -48,8 +50,8 @@ class PostController extends Controller
 
                 $name = $request->image->store('images','public');
         
-                $tag = $request->tagsel;
-                $tags = implode(" ",$tag);
+                $tag = $request->tags;
+                $tags = implode(",",$tag);
         
                         Post::Create(
                     
@@ -80,8 +82,8 @@ class PostController extends Controller
      */
     public function show($id)
     {
-         $sel = Post::all();
-        return view('home', ['datas' => $sel]);
+        //  $sel = Post::all();
+        // return view('home', ['datas' => $sel]);
       
     }
 
@@ -94,7 +96,11 @@ class PostController extends Controller
     public function edit($id)
     {
         $data = Post::find($id);
-        return view('post',compact('data'));
+        $tags = explode(",",$data->tag_id);
+        return $tags;
+         
+        // $comment = Comment::where('postid',$id)->get();
+        // return view('post',compact('data','comment','tags'));
     
     }
 

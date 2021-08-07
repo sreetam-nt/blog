@@ -47,7 +47,7 @@
                         @foreach($tag as $inf)
                         <table style="width: 100%;" class="table">
                             <tr>
-                                <td> <a href="">{{$inf->tname}}</a></td>
+                                <td> <a href="/tag/{{$inf->id}}">{{$inf->tname}}</a></td>
 
                                 <td style="text-align: right;"><a href="/delete/{{$inf->id}}" class="btn-close" aria-label="Close"></a></td>
                             </tr>
@@ -95,7 +95,7 @@
                                                 <label class="form-label">Post Tags :</label>
 
                                                 @foreach($tag as $inf)
-                                                <input type="checkbox" name="tagsel[]" value="{{$inf->id}}">
+                                                <input type="checkbox" name="tags[]" value="{{$inf->id}}">
                                                 {{$inf->tname}}
                                                 @endforeach
 
@@ -137,8 +137,3 @@
 
 @endsection
 
-<script>
-    $(document).ready(function() {
-        $('.js-example-basic-multiple').select2();
-    });
-</script>

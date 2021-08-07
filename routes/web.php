@@ -29,8 +29,8 @@ Route::post('/home', [TagController::class, 'store']);
 Route::post('/store', [PostController::class, 'store']);
 Route::get('/delete/{id}',[TagController::class,'destroy']);
 Route::get('/edit/{id}',[PostController::class,'edit']);
-Route::post('/comment',[CommentController::class,'store']);
 
-// Route::get('/', function () {
-//     return view('post');
-// });
+Route::get('/tag/{id}',[TagController::class,'edit']);
+
+Route::post('/comment/{id}',[CommentController::class,'store']);
+

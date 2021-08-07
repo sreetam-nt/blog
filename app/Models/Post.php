@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use App\Models\Tag;
+use App\Models\Comment;
 
 class Post extends Model
 {
@@ -28,10 +29,10 @@ class Post extends Model
     {
         return $this->belongsTo(Tag::class);
     }
-    // public function comment()
-    // {
-    //     return $this->belongsTo(Comment::class);
-    // }
+    public function comment()
+    {
+        return $this->belongsTo(Comment::class,'postid','id');
+    }
 
 
 }

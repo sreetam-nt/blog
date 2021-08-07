@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use Illuminate\Http\Request;
 use App\Models\Tag;
 
@@ -63,7 +64,9 @@ class TagController extends Controller
      */
     public function edit($id)
     {
-        //
+         $post = Post::where('tag_id',$id)->get();
+         $tag = Tag::get();
+         return view('home',compact('tag','post'));
     }
 
     /**

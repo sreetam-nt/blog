@@ -33,7 +33,7 @@ class HomeController extends Controller
        $tag = Tag::all();
 
          return view('home',compact('post','tag'));
-        // return $user->name;
+        
        
          
     }

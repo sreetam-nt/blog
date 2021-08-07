@@ -34,12 +34,15 @@ class CommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,$id)
     {
         Comment::create(['cname'=>$request->comment,
-        'users_id' =>Auth::user()->id]);
+        'users_id' =>Auth::user()->id,'postid' =>$id]);
 
-        return redirect('post');
+        return redirect()->back();
+      
+         
+      
     }
 
     /**
