@@ -18,7 +18,7 @@
             
             <img src="{{ asset('storage/'.$data->image) }}" class="card-img-top" alt="image" width="100%" height="200px">
             
-            <p>
+            
             <h4 class="card-title">{{$data->user->name}}</h4>
             <span style="float: right;">Posted At: </span><br>
             <span style="float: right;">{{$data->created_at}}</span>
@@ -30,10 +30,10 @@
                 <p class="card-text">{{$data->desc}}</p>
                 <h4 class="card-title">Tags</h4>
                 
-              
-                <p class="card-text">{{$data->tag->tname}}</p>
+              @foreach($tag as $tg)
+                <p class="card-text">{{$tg->tname}}</p>
 
-         
+         @endforeach
                
                 <h4 class="card-title">Comments</h4>
                 

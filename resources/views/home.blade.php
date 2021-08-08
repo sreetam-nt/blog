@@ -1,12 +1,18 @@
 @extends('layouts.app')
+<style>
+    .taglink{
+    text-decoration: none;
+    
+}
 
+</style>
 @section('content')
 <div class="container">
     <div class="container px-4">
         <div class="row gx-5">
             <div class="col">
                 <div class="card">
-                    <div class="card-header">Tags
+                    <div class="card-header bg-success">Tags
 
                         <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#tagModal" style="float: right;">Add Tag</button>
 
@@ -43,15 +49,15 @@
 
                     </div>
 
-                    <div class="card-body">
+                    <div class="card-body bg-secondary">
                     <table style="width: 100%;" class="table">
                     <tr>
-                                <td> <a href="/home">All Posts</a></td>
+                                <td> <a href="/home" class="taglink">All Posts</a></td>
                     </tr>
                         @foreach($tag as $inf)
                         
                             <tr>
-                                <td> <a href="/tag/{{$inf->id}}">{{$inf->tname}}</a></td>
+                                <td> <a href="/tag/{{$inf->id}}"class="taglink">{{$inf->tname}}</a></td>
 
                                 <td style="text-align: right;"><a href="/delete/{{$inf->id}}" class="btn-close" aria-label="Close"></a></td>
                             </tr>
@@ -64,7 +70,7 @@
             </div>
             <div class="col">
                 <div class="card">
-                    <div class="card-header">Posts
+                    <div class="card-header bg-success">Posts
 
 
                         <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#postModal" style="float: right;">Add Post</button>
@@ -121,7 +127,7 @@
 
                     </div>
 
-                    <div class="card-body">
+                    <div class="card-body bg-secondary">
                         @foreach($post as $show)
                         <div class="card" style="width: 100%; height:300px">
                         <a href="/edit/{{$show->id}}"><img src="{{ asset('storage/'.$show->image) }}" class="card-img-top " alt="image" width="100%" height="200px"></a>
@@ -132,8 +138,10 @@
                             </div>
                         </div>
                         @endforeach
-
+                        {{$post->links()}}
                     </div>
+                     
+                   
                 </div>
             </div>
         </div>
