@@ -1,10 +1,10 @@
 @extends('layouts.app')
 <style>
-    .taglink{
-    text-decoration: none;
-    
-}
+    .taglink {
+        text-decoration: none;
+        color: white;
 
+    }
 </style>
 @section('content')
 <div class="container">
@@ -12,7 +12,7 @@
         <div class="row gx-5">
             <div class="col">
                 <div class="card">
-                    <div class="card-header bg-success">Tags
+                    <div class="card-header bg-success ">Tags
 
                         <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#tagModal" style="float: right;">Add Tag</button>
 
@@ -50,16 +50,15 @@
                     </div>
 
                     <div class="card-body bg-secondary">
-                    <table style="width: 100%;" class="table">
-                    <tr>
-                                <td> <a href="/home" class="taglink">All Posts</a></td>
-                    </tr>
-                        @foreach($tag as $inf)
-                        
+                        <table style="width: 100%;" class="table">
                             <tr>
-                                <td> <a href="/tag/{{$inf->id}}"class="taglink">{{$inf->tname}}</a></td>
+                                <td> <a href="/home" class="taglink">All Posts</a></td>
+                            </tr>
+                            @foreach($tag as $inf)
 
-                                <td style="text-align: right;"><a href="/delete/{{$inf->id}}" class="btn-close" aria-label="Close"></a></td>
+                            <tr>
+                                <td> <a href="/tag/{{$inf->id}}" class="taglink">{{$inf->tname}}</a></td>
+
                             </tr>
 
                             @endforeach
@@ -70,7 +69,7 @@
             </div>
             <div class="col">
                 <div class="card">
-                    <div class="card-header bg-success">Posts
+                    <div class="card-header bg-success ">Posts
 
 
                         <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#postModal" style="float: right;">Add Post</button>
@@ -140,8 +139,8 @@
                         @endforeach
                         {{$post->links()}}
                     </div>
-                     
-                   
+
+
                 </div>
             </div>
         </div>
@@ -149,3 +148,5 @@
 </div>
 
 @endsection
+
+<!-- <td style="text-align: right ;"><a href="/delete/{{$inf->id}}" class="btn-close " ></a></td>

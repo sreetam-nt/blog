@@ -64,7 +64,26 @@ class TagController extends Controller
      */
     public function edit($id)
     {
-         $post = Post::where('tag_id',$id)->get();
+        //  $pos = Post::all();
+        //  $arrid=[];
+        //  foreach($pos as $ps){
+        //    $arrid[] = explode(",",$ps->tag_id);
+        //  }
+         
+        // //  return $arrid[1];
+        // $ids=[];
+        // $post=[];
+        //  if($arrid){
+        //  foreach($arrid as $arr){
+        //      if($arr = $id){
+        //       $ids[]=$arr;
+        //      }
+             
+        //  }
+        //  return dd($ids);
+        //  }
+         $post = Post::where('tag_id',$id)->paginate(2);
+       
          $tag = Tag::get();
          return view('home',compact('tag','post'));
     }

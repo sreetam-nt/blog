@@ -34,3 +34,5 @@ Route::get('/tag/{id}',[TagController::class,'edit']);
 
 Route::post('/comment/{id}',[CommentController::class,'store']);
 
+Route::get('/notification', [PostController::class, 'notification']);
+

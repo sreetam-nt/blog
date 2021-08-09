@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Comment;
 use App\Models\Tag;
+use App\Models\User;
+use Notification;
+use App\Notifications\PostNotification;
+
+
+
 
 class PostController extends Controller
 {
@@ -39,14 +45,7 @@ class PostController extends Controller
     public function store(Request $request)
     {
         
-        //    $request->validate([
-        //     'image' => 'required|image|mimes:jpg,png,jpeg|max:2048',
-        //     'title' =>'required',
-        //     'desc' =>'required']);
-
-            // if($validatedData){
-
-                // $name = $request->file('image')->getClientOriginalName();
+     
 
                 $name = $request->image->store('images','public');
         
@@ -64,12 +63,6 @@ class PostController extends Controller
                            ]);
                            return redirect('home');
 
-
-            // }
-            // else{
-               
-            //         // 
-            // }
 
             
     }
@@ -98,8 +91,9 @@ class PostController extends Controller
         $data = Post::find($id);
         $tags = explode(",",$data->tag_id);
         
-        $tag =array();
+        $tag =[];
          foreach($tags as $ids){
+
             $tag[] = Tag::find($ids);
            
          }
@@ -130,5 +124,26 @@ class PostController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function notification(Request $req)
+    {
+      $user = Auth::user();
+       $name= Auth::user()->name;
+    //   $post =Post::all();
+    // //    $title = $post->id;
+  
+        $postdata = [
+         
+            'greeting' => $name,
+            'thanks' => 'Thank you for Posting',
+
+            //  'postText' => $title,
+           
+         ];
+       
+  
+        Notification::send($user, new PostNotification($postdata));
+   
     }
 }
