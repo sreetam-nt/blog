@@ -44,19 +44,19 @@
                     </div>
 
                     <div class="card-body">
-                    <table style="width: 100%;" class="table">
-                    <tr>
+                        <table style="width: 100%;" class="table">
+                            <tr>
                                 <td> <a href="/home">All Posts</a></td>
-                    </tr>
-                        @foreach($tag as $inf)
-                        
+                            </tr>
+                            @foreach($tag as $inf)
+
                             <tr>
                                 <td> <a href="/tag/{{$inf->id}}">{{$inf->tname}}</a></td>
 
                                 <td style="text-align: right;"><a href="/delete/{{$inf->id}}" class="btn-close" aria-label="Close"></a></td>
                             </tr>
-                       
-                        @endforeach
+
+                            @endforeach
                         </table>
 
                     </div>
@@ -124,8 +124,8 @@
                     <div class="card-body">
                         @foreach($post as $show)
                         <div class="card" style="width: 100%; height:300px">
-                        <a href="/edit/{{$show->id}}"><img src="{{ asset('storage/'.$show->image) }}" class="card-img-top " alt="image" width="100%" height="200px"></a>
-                        
+                            <a href="/edit/{{$show->id}}"><img src="{{ asset('storage/'.$show->image) }}" class="card-img-top " alt="image" width="100%" height="200px"></a>
+
                             <div class="card-body">
                                 <span class="card-text">Posted By: &nbsp; {{$show->user->name}}</span>
                                 <span class="card-text" style="float: right;">{{$show->created_at}}</span>
@@ -141,4 +141,3 @@
 </div>
 
 @endsection
-
