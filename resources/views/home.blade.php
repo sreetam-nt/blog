@@ -16,7 +16,7 @@
 
                         <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#tagModal" style="float: right;">Add Tag</button>
 
-                        <form action="/home" method="POST">
+                        <form action="{{url('/home')}}" method="POST">
                             @csrf
                             <div class="modal fade" id="tagModal" tabindex="-1" aria-labelledby="tagModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
@@ -74,7 +74,7 @@
 
                         <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#postModal" style="float: right;">Add Post</button>
 
-                        <form action="/store" enctype="multipart/form-data" method="POST">
+                        <form action="{{url('/store')}}" enctype="multipart/form-data" method="POST">
 
                             <div class="modal fade" id="postModal" tabindex="-1" aria-labelledby="postModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
