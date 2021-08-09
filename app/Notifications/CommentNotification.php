@@ -7,19 +7,19 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class PostNotification extends Notification
+class CommentNotification extends Notification
 {
     use Queueable;
-    private $postdata;
+    private $commentdata;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($postdata)
+    public function __construct($commentdata)
     {
-        $this->postdata = $postdata; 
+        $this->commentdata = $commentdata;
     }
 
     /**
@@ -30,7 +30,7 @@ class PostNotification extends Notification
      */
     public function via($notifiable)
     {
-        return ['database','mail'];
+        return ['mail','database'];
     }
 
     /**
@@ -42,10 +42,8 @@ class PostNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-        
-        ->greeting($this->postdata['greeting'])
-        
-        ->line($this->postdata['thanks']);
+        ->greeting($this->commentdata['greeting'])
+        ->line($this->commentdata['thanks']);
     }
 
     /**
@@ -57,8 +55,7 @@ class PostNotification extends Notification
     public function toArray($notifiable)
     {
         return [
-            
+            //
         ];
     }
-    
 }

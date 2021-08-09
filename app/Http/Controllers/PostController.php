@@ -45,8 +45,6 @@ class PostController extends Controller
     public function store(Request $request)
     {
         
-     
-
                 $name = $request->image->store('images','public');
         
                 $tag = $request->tags;
@@ -61,9 +59,20 @@ class PostController extends Controller
                             'users_id' =>Auth::user()->id,
                             'comment_id'=>0
                            ]);
-                           return redirect('home');
 
-
+       $user = Auth::user();
+       $names= Auth::user()->name;
+  
+        $postdata = [
+         
+            'greeting' => $names,
+            'thanks' => 'Thank you for Posting',
+           
+         ];
+       
+  
+        Notification::send($user, new PostNotification($postdata));
+        return redirect('home');
             
     }
 
@@ -75,9 +84,7 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        //  $sel = Post::all();
-        // return view('home', ['datas' => $sel]);
-      
+       
     }
 
     /**
@@ -128,22 +135,7 @@ class PostController extends Controller
 
     public function notification(Request $req)
     {
-      $user = Auth::user();
-       $name= Auth::user()->name;
-    //   $post =Post::all();
-    // //    $title = $post->id;
-  
-        $postdata = [
-         
-            'greeting' => $name,
-            'thanks' => 'Thank you for Posting',
-
-            //  'postText' => $title,
-           
-         ];
-       
-  
-        Notification::send($user, new PostNotification($postdata));
+    
    
     }
 }

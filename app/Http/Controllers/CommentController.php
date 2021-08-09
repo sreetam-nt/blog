@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Comment;
 use Illuminate\Support\Facades\Auth;
+use Notification;
+use App\Notifications\CommentNotification;
 
 class CommentController extends Controller
 {
@@ -38,6 +40,19 @@ class CommentController extends Controller
     {
         Comment::create(['cname'=>$request->comment,
         'users_id' =>Auth::user()->id,'postid' =>$id]);
+
+        $user = Auth::user();
+        $names= Auth::user()->name;
+   
+         $commentdata = [
+          
+             'greeting' => $names,
+             'thanks' => 'Thank you for Commenting',
+            
+          ];
+        
+   
+         Notification::send($user, new CommentNotification($commentdata));
 
         return redirect()->back();
       
