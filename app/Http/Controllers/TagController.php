@@ -25,7 +25,6 @@ class TagController extends Controller
      */
     public function create()
     {
-        
     }
 
     /**
@@ -36,16 +35,14 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        
-         Tag::firstOrCreate(
-            
-        ['tname' => request('tags')]
-          
+
+        Tag::firstOrCreate(
+
+            ['tname' => request('tags')]
+
         );
         return redirect('home');
-        
-        
-   }
+    }
 
     /**
      * Display the specified resource.
@@ -64,28 +61,18 @@ class TagController extends Controller
      */
     public function edit($id)
     {
-        //  $pos = Post::all();
-        //  $arrid=[];
-        //  foreach($pos as $ps){
-        //    $arrid[] = explode(",",$ps->tag_id);
-        //  }
-         
-        // //  return $arrid[1];
-        // $ids=[];
-        // $post=[];
-        //  if($arrid){
-        //  foreach($arrid as $arr){
-        //      if($arr = $id){
-        //       $ids[]=$arr;
-        //      }
-             
-        //  }
-        //  return dd($ids);
-        //  }
-         $post = Post::where('tag_id',$id)->paginate(2);
-       
-         $tag = Tag::get();
-         return view('home',compact('tag','post'));
+        $pos = Post::all();
+        $arrid = [];
+        foreach ($pos as $ps) {
+            $arrid[] = explode(",", $ps->tag_id);
+        }
+        $users = Post::where('tag_id', $id)->get();
+
+        // $post = Post::where('tag_id', $id)->paginate(2);
+
+        // $tag = Tag::get();
+        // return view('home', compact('tag', 'post'));
+         return $arrid;
     }
 
     /**
@@ -108,6 +95,7 @@ class TagController extends Controller
      */
     public function destroy($id)
     {
+        
         $data = Tag::find($id);
         $data->delete();
         return redirect('home');

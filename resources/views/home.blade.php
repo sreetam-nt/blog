@@ -58,6 +58,7 @@
 
                             <tr>
                                 <td> <a href="/tag/{{$inf->id}}" class="taglink">{{$inf->tname}}</a></td>
+                                <td style="text-align: right ;"><a href="/delete/{{$inf->id}}" class="btn-close " ></a></td>
 
                             </tr>
 
@@ -149,4 +150,4 @@
 
 @endsection
 
-<!-- <td style="text-align: right ;"><a href="/delete/{{$inf->id}}" class="btn-close " ></a></td>
+<!-- 

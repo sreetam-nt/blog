@@ -43,6 +43,7 @@ class CommentNotification extends Notification
     {
         return (new MailMessage)
         ->greeting($this->commentdata['greeting'])
+        ->line($this->commentdata['body'])
         ->line($this->commentdata['thanks']);
     }
 
@@ -55,7 +56,7 @@ class CommentNotification extends Notification
     public function toArray($notifiable)
     {
         return [
-            //
+            'data' => $this->commentdata['body']
         ];
     }
 }

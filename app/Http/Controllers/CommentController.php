@@ -38,15 +38,16 @@ class CommentController extends Controller
      */
     public function store(Request $request,$id)
     {
-        Comment::create(['cname'=>$request->comment,
+        $cmt = Comment::create(['cname'=>$request->comment,
         'users_id' =>Auth::user()->id,'postid' =>$id]);
 
         $user = Auth::user();
         $names= Auth::user()->name;
-   
+        $cname =$cmt->cname;
          $commentdata = [
           
              'greeting' => $names,
+              'body'=>$cname,
              'thanks' => 'Thank you for Commenting',
             
           ];
@@ -55,6 +56,7 @@ class CommentController extends Controller
          Notification::send($user, new CommentNotification($commentdata));
 
         return redirect()->back();
+   
       
          
       
@@ -105,3 +107,5 @@ class CommentController extends Controller
         //
     }
 }
+
+// /postdetails/{{$notification->notifiable_id}}
