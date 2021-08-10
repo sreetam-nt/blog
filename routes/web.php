@@ -36,3 +36,5 @@ Route::post('/comment/{id}',[CommentController::class,'store']);
 
 Route::get('/notification', [PostController::class, 'notification']);
 
+Route::get('/markasread', [CommentController::class, 'markasread']);
+

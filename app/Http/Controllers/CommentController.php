@@ -106,6 +106,16 @@ class CommentController extends Controller
     {
         //
     }
+    public function markasread()
+    {
+        foreach (auth()->user()->unreadNotifications as $notification) {
+            $notification->markAsRead();
+        }
+
+        return redirect()->back();
+        
+    }
+
 }
 
 // /postdetails/{{$notification->notifiable_id}}
