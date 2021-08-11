@@ -66,13 +66,13 @@ class TagController extends Controller
         foreach ($pos as $ps) {
             $arrid[] = explode(",", $ps->tag_id);
         }
-        $users = Post::where('tag_id', $id)->get();
+        // $users = Post::where('tag_id', $id)->get();
 
-        // $post = Post::where('tag_id', $id)->paginate(2);
+        $post = Post::where('tag_id', $id)->paginate(2);
 
-        // $tag = Tag::get();
-        // return view('home', compact('tag', 'post'));
-         return $arrid;
+        $tag = Tag::get();
+        return view('home', compact('tag', 'post'));
+        //  return $arrid;
     }
 
     /**

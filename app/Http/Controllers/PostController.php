@@ -6,6 +6,7 @@ use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Comment;
+use App\Models\Notifications;
 use App\Models\Tag;
 use App\Models\User;
 use Notification;
@@ -50,7 +51,7 @@ class PostController extends Controller
                 $tag = $request->tags;
                 $tags = implode(",",$tag);
         
-                        Post::Create(
+                 $post =  Post::create(
                     
                             ['title' => $request->title,
                             'desc' => $request->desc,
@@ -62,11 +63,14 @@ class PostController extends Controller
 
        $user = Auth::user();
        $names= Auth::user()->name;
+
+    //    Notifications::Create(['postid'=>$post->id]);
   
         $postdata = [
          
             'greeting' => $names,
             'thanks' => 'Thank you for Posting',
+            'body' =>$post->title
            
          ];
        

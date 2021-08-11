@@ -74,9 +74,10 @@
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                   
                                     <ul>
-                                        <li style="list-style-type:none;"><a style="text-decoration:none;" href="/markasread">Mark As Read</a></li>
+                                        <li style="list-style-type:none;"><a style="text-decoration:none;" 
+                                        href="/markasread">Mark As Read</a></li>
                                         @foreach(auth()->user()->unreadNotifications  as $notification)
-                                        <li style="list-style-type:none;"><a class="dropdown-item" href="">New Notification <b class="text-primary">{{$notification->data['data']}} </b></a>  
+                                        <li style="list-style-type:none;"><a class="dropdown-item" href="/markasread">New Notification <b class="text-primary">{{$notification->data['data']}} </b></a>  
                                        </li>
                                     @endforeach
                                     </ul>

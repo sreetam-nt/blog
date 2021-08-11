@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\PayPalController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,9 +19,9 @@ use App\Http\Controllers\PostController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Auth::routes();
 
@@ -38,3 +39,11 @@ Route::get('/notification', [PostController::class, 'notification']);
 
 Route::get('/markasread', [CommentController::class, 'markasread']);
 
+Route::get('/', function () {
+    return view('paypal');
+});
+
+
+Route::get('payment', [PayPalController::class,'payment'])->name('payment');
+Route::get('cancel', [PayPalController::class,'cancel'])->name('cancel');
+Route::get('payment/success', [PayPalController::class,'success'])->name('success');

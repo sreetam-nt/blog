@@ -6,7 +6,10 @@ use Illuminate\Http\Request;
 use App\Models\Comment;
 use Illuminate\Support\Facades\Auth;
 use Notification;
+
+
 use App\Notifications\CommentNotification;
+use App\Models\Notifications;
 
 class CommentController extends Controller
 {
@@ -51,6 +54,14 @@ class CommentController extends Controller
              'thanks' => 'Thank you for Commenting',
             
           ];
+        //   $data = $notification->toArray($notifiable);
+        //   Notifications::create(['postid'=>$id, 'id' => 1,
+        //   'notifiable_type'=> Auth::user()->id,
+        //   'type' => null ,'read_at' => null,
+        //   'data' => null,
+
+        // //   get_class($notification)
+        // ]);
         
    
          Notification::send($user, new CommentNotification($commentdata));
@@ -115,6 +126,19 @@ class CommentController extends Controller
         return redirect()->back();
         
     }
+
+    public function notifredirect()
+    {
+        // $notf = Notifications::get();
+        // foreach($notf as $nt){
+        //     $id = $nt->id;
+        // }
+       
+
+        // return dd($id);
+        
+    }
+
 
 }
 

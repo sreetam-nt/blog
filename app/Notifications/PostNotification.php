@@ -44,7 +44,7 @@ class PostNotification extends Notification
         return (new MailMessage)
         
         ->greeting($this->postdata['greeting'])
-        
+        ->line($this->postdata['body'])
         ->line($this->postdata['thanks']);
     }
 
@@ -57,7 +57,7 @@ class PostNotification extends Notification
     public function toArray($notifiable)
     {
         return [
-            
+            'data' => $this->postdata['body']
         ];
     }
     
