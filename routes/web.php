@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\PayPalController;
+use App\Http\Controllers\PaytmController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,3 +48,11 @@ Route::get('/', function () {
 Route::get('payment', [PayPalController::class,'payment'])->name('payment');
 Route::get('cancel', [PayPalController::class,'cancel'])->name('cancel');
 Route::get('payment/success', [PayPalController::class,'success'])->name('success');
+
+
+Route::get('/initiate',[PaytmController::class,'initiate'])->name('initiate.payment');
+Route::post('/payment',[PaytmController::class,'pay'])->name('make.payment');
+Route::post('/payment/status', [PaytmController::class,'paymentCallback'])->name('status');
+Route::get('/paytm', function () {
+    return view('paytm');
+});
