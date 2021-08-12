@@ -39,21 +39,23 @@ class CommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request,$id)
+    public function store(Request $request, $id)
     {
-        $cmt = Comment::create(['cname'=>$request->comment,
-        'users_id' =>Auth::user()->id,'postid' =>$id]);
+        $cmt = Comment::create([
+            'cname' => $request->comment,
+            'users_id' => Auth::user()->id, 'postid' => $id
+        ]);
 
         $user = Auth::user();
-        $names= Auth::user()->name;
-        $cname =$cmt->cname;
-         $commentdata = [
-          
-             'greeting' => $names,
-              'body'=>$cname,
-             'thanks' => 'Thank you for Commenting',
-            
-          ];
+        $names = Auth::user()->name;
+        $cname = $cmt->cname;
+        $commentdata = [
+
+            'greeting' => $names,
+            'body' => $cname,
+            'thanks' => 'Thank you for Commenting',
+
+        ];
         //   $data = $notification->toArray($notifiable);
         //   Notifications::create(['postid'=>$id, 'id' => 1,
         //   'notifiable_type'=> Auth::user()->id,
@@ -62,15 +64,11 @@ class CommentController extends Controller
 
         // //   get_class($notification)
         // ]);
-        
-   
-         Notification::send($user, new CommentNotification($commentdata));
+
+
+        Notification::send($user, new CommentNotification($commentdata));
 
         return redirect()->back();
-   
-      
-         
-      
     }
 
     /**
@@ -124,7 +122,6 @@ class CommentController extends Controller
         }
 
         return redirect()->back();
-        
     }
 
     public function notifredirect()
@@ -133,13 +130,11 @@ class CommentController extends Controller
         // foreach($notf as $nt){
         //     $id = $nt->id;
         // }
-       
+
 
         // return dd($id);
-        
+
     }
-
-
 }
 
 // /postdetails/{{$notification->notifiable_id}}

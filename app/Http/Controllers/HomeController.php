@@ -28,13 +28,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        
-       $post = Post::paginate(3);
-       $tag = Tag::all();
 
-         return view('home',compact('post','tag'));
-        
-       
-         
+        $post = Post::paginate(3);
+        $tag = Tag::all();
+
+        return view('home', compact('post', 'tag'));
     }
 }

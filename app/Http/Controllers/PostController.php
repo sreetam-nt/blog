@@ -45,39 +45,40 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        
-                $name = $request->image->store('images','public');
-        
-                $tag = $request->tags;
-                $tags = implode(",",$tag);
-        
-                 $post =  Post::create(
-                    
-                            ['title' => $request->title,
-                            'desc' => $request->desc,
-                            'image' =>$name,
-                            'tag_id' =>$tags,
-                            'users_id' =>Auth::user()->id,
-                            'comment_id'=>0
-                           ]);
 
-       $user = Auth::user();
-       $names= Auth::user()->name;
+        $name = $request->image->store('images', 'public');
 
-    //    Notifications::Create(['postid'=>$post->id]);
-  
+        $tag = $request->tags;
+        $tags = implode(",", $tag);
+
+        $post =  Post::create(
+
+            [
+                'title' => $request->title,
+                'desc' => $request->desc,
+                'image' => $name,
+                'tag_id' => $tags,
+                'users_id' => Auth::user()->id,
+                'comment_id' => 0
+            ]
+        );
+
+        $user = Auth::user();
+        $names = Auth::user()->name;
+
+        //    Notifications::Create(['postid'=>$post->id]);
+
         $postdata = [
-         
+
             'greeting' => $names,
             'thanks' => 'Thank you for Posting',
-            'body' =>$post->title
-           
-         ];
-       
-  
+            'body' => $post->title
+
+        ];
+
+
         Notification::send($user, new PostNotification($postdata));
         return redirect('home');
-            
     }
 
     /**
@@ -88,7 +89,6 @@ class PostController extends Controller
      */
     public function show($id)
     {
-       
     }
 
     /**
@@ -100,18 +100,15 @@ class PostController extends Controller
     public function edit($id)
     {
         $data = Post::find($id);
-        $tags = explode(",",$data->tag_id);
-        
-        $tag =[];
-         foreach($tags as $ids){
+        $tags = explode(",", $data->tag_id);
+
+        $tag = [];
+        foreach ($tags as $ids) {
 
             $tag[] = Tag::find($ids);
-           
-         }
-        $comment = Comment::where('postid',$id)->get();
-        return view('post',compact('data','comment','tag'));
-        
-    
+        }
+        $comment = Comment::where('postid', $id)->get();
+        return view('post', compact('data', 'comment', 'tag'));
     }
 
     /**
@@ -139,7 +136,5 @@ class PostController extends Controller
 
     public function notification(Request $req)
     {
-    
-   
     }
 }

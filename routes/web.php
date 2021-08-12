@@ -8,6 +8,8 @@ use App\Http\Controllers\TagController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\PayPalController;
 use App\Http\Controllers\PaytmController;
+use App\Http\Controllers\StripeController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -20,13 +22,13 @@ use App\Http\Controllers\PaytmController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    return view('welcome');
+});
 
 Auth::routes();
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('paymentcheck');
 Route::post('/home', [TagController::class, 'store']);
 Route::post('/store', [PostController::class, 'store']);
 Route::get('/delete/{id}',[TagController::class,'destroy'])->middleware('tagcheck');
@@ -40,19 +42,35 @@ Route::get('/notification', [PostController::class, 'notification']);
 
 Route::get('/markasread', [CommentController::class, 'markasread']);
 
-Route::get('/', function () {
+Route::get('/stripe', function () {
+    return view('stripe');
+});
+
+Route::get('/paypal', function () {
     return view('paypal');
 });
+Route::get('/stripe-payment', [StripeController::class, 'handleGet']);
+Route::get('/cancelpayment', [StripeController::class, 'cancel']);
+Route::post('/stripe-payment', [StripeController::class, 'handlePost'])->name('stripe.payment');
 
 
-Route::get('payment', [PayPalController::class,'payment'])->name('payment');
-Route::get('cancel', [PayPalController::class,'cancel'])->name('cancel');
-Route::get('payment/success', [PayPalController::class,'success'])->name('success');
+// Route::get('payment', [PayPalController::class,'payment'])->name('payment');
+// Route::get('cancel', [PayPalController::class,'cancel'])->name('cancel');
+// Route::get('payment/success', [PayPalController::class,'success'])->name('success');
 
 
-Route::get('/initiate',[PaytmController::class,'initiate'])->name('initiate.payment');
-Route::post('/payment',[PaytmController::class,'pay'])->name('make.payment');
-Route::post('/payment/status', [PaytmController::class,'paymentCallback'])->name('status');
-Route::get('/paytm', function () {
-    return view('paytm');
-});
+// Route::get('/initiate',[PaytmController::class,'initiate'])->name('initiate.payment');
+// Route::post('/payment',[PaytmController::class,'pay'])->name('make.payment');
+
+// Route::post('/payment/status', [PaytmController::class,'paymentCallback'])->name('status');
+
+// Route::get('/paytm', function () {
+//     return view('paytm');
+// });
+
+
+// Route::post('paytm-payment',[PaytmController::class, 'paytmPayment'])->name('paytm.payment');
+// Route::post('paytm-callback',[PaytmController::class, 'paytmCallback'])->name('paytm.callback');
+// Route::get('paytm-purchase',[PaytmController::class, 'paytmPurchase'])->name('paytm.purchase');
+
+

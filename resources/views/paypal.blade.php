@@ -1,3 +1,7 @@
+
+@extends('layouts.app')
+
+@section('content')
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,7 +27,7 @@
             
                         <li>Unlimited Comments Post</li>
                         <li>Unlimited Posts Upload</li>
-                    </ul> <a href="{{url('/paytm')}}" class="btn btn-primary mb-3 bg-dark">Buy</a>
+                    </ul> <a href="/stripe" class="btn btn-primary mb-3 bg-dark">Buy</a>
                 </div>
             </div>
             <div class="card card-pricing popular shadow text-center px-3 mb-4"> <span class="h6 w-60 mx-auto px-4 py-1 rounded-bottom bg-dark text-white shadow-sm">Three Months</span>
@@ -34,7 +38,7 @@
                     <ul class="list-unstyled mb-4">
                     <li>Unlimited Comments Post</li>
                         <li>Unlimited Posts Upload</li>
-                    </ul> <a href="#"  class="btn btn-primary mb-3 bg-dark">Buy</a>
+                    </ul> <a href="/stripe" class="btn btn-primary mb-3 bg-dark">Buy</a>
                 </div>
             </div>
             <div class="card card-pricing text-center px-3 mb-4"> <span class="h6 w-60 mx-auto px-4 py-1 rounded-bottom bg-dark text-white shadow-sm">Six Months</span>
@@ -45,7 +49,7 @@
                     <ul class="list-unstyled mb-4">
                     <li>Unlimited Comments Post</li>
                         <li>Unlimited Posts Upload</li>
-                    </ul> <a href="#"  class="btn btn-primary mb-3 bg-dark">Buy</a>
+                    </ul> <a href="/stripe" class="btn btn-primary mb-3 bg-dark">Buy</a>
                 </div>
             </div>
             <div class="card card-pricing text-center px-3 mb-4"> <span class="h6 w-60 mx-auto px-4 py-1 rounded-bottom bg-dark text-white shadow-sm">Tweleve Months</span>
@@ -56,7 +60,7 @@
                     <ul class="list-unstyled mb-4">
                     <li>Unlimited Comments Post</li>
                         <li>Unlimited Posts Upload</li>
-                    </ul> <a href="#"  class="btn btn-primary mb-3 bg-dark">Buy</a>
+                    </ul> <a href="/stripe" class="btn btn-primary mb-3 bg-dark">Buy</a>
                 </div>
             </div>
         </div>
@@ -64,3 +68,5 @@
 </body>
 
 </html>
+
+@endsection

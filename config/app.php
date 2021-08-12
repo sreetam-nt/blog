@@ -162,7 +162,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Srmklive\PayPal\Providers\PayPalServiceProvider::class,
-        Anand\LaravelPaytmWallet\PaytmWalletServiceProvider::class,
+        // Anand\LaravelPaytmWallet\PaytmWalletServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -231,7 +231,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
          'PayPal' => Srmklive\PayPal\Facades\PayPal::class,
-         'PaytmWallet' => Anand\LaravelPaytmWallet\Facades\PaytmWallet::class,
+         'PaytmWallet' => Anand\LaravelPaytmWallet\Facades\PaytmWallet::class, 
          
         
 

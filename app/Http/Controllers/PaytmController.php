@@ -4,69 +4,64 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Anand\LaravelPaytmWallet\Facades\PaytmWallet;
-use App\Paytm;
 
 class PaytmController extends Controller
 {
-    
-    // display a form for payment
-    public function initiate()
+    /**
+     * Redirect the user to the Payment Gateway.
+     *
+     * @return Response
+     */
+    public function paytmPayment(Request $request)
     {
-        return view('paytm');
-    }
-
-    public function pay(Request $request)
-    {
-        $amount = 1500; //Amount to be paid
-
-        $userData = [
-            'name' => $request->name, // Name of user
-            'mobile' => $request->mobile, //Mobile number of user
-            'email' => $request->email, //Email of user
-            'fee' => $amount,
-            'order_id' => $request->mobile."_".rand(1,1000) //Order id
-        ];
-
-        $paytmuser = Paytm::create($userData); // creates a new database record
-
         $payment = PaytmWallet::with('receive');
-
         $payment->prepare([
-            'order' => $userData['order_id'], 
-            'user' => $paytmuser->id,
-            'mobile_number' => $userData['mobile'],
-            'email' => $userData['email'], // your user email address
-            'amount' => $amount, // amount will be paid in INR.
-            'callback_url' => route('status') // callback URL
+          'order' => rand(),
+          'user' => rand(10,1000),
+          'mobile_number' => '123456789',
+          'email' => 'paytmtest@gmail.com',
+          'amount' => $request->amount,
+          'callback_url' => route('paytm.callback'),
         ]);
-        return $payment->receive();  // initiate a new payment
+        return $payment->receive();
     }
 
-    public function paymentCallback()
+
+    /**
+     * Obtain the payment information.
+     *
+     * @return Object
+     */
+    public function paytmCallback()
     {
         $transaction = PaytmWallet::with('receive');
-
-        $response = $transaction->response();
         
-        $order_id = $transaction->getOrderId(); // return a order id
-      
-        $transaction->getTransactionId(); // return a transaction id
-    
-        // update the db data as per result from api call
-        if ($transaction->isSuccessful()) {
-            Paytm::where('order_id', $order_id)->update(['status' => 1, 'transaction_id' => $transaction->getTransactionId()]);
-            return redirect(route('initiate.payment'))->with('message', "Your payment is successfull.");
-
-        } else if ($transaction->isFailed()) {
-            Paytm::where('order_id', $order_id)->update(['status' => 0, 'transaction_id' => $transaction->getTransactionId()]);
-            return redirect(route('initiate.payment'))->with('message', "Your payment is failed.");
-            
-        } else if ($transaction->isOpen()) {
-            Paytm::where('order_id', $order_id)->update(['status' => 2, 'transaction_id' => $transaction->getTransactionId()]);
-            return redirect(route('initiate.payment'))->with('message', "Your payment is processing.");
+        $response = $transaction->response(); // To get raw response as array
+        //Check out response parameters sent by paytm here -> http://paywithpaytm.com/developer/paytm_api_doc?target=interpreting-response-sent-by-paytm
+        
+        if($transaction->isSuccessful()){
+          //Transaction Successful
+          return view('paytm.paytm-success-page');
+        }else if($transaction->isFailed()){
+          //Transaction Failed
+          return view('paytm.paytm-fail');
+        }else if($transaction->isOpen()){
+          //Transaction Open/Processing
+          return view('paytm.paytm-fail');
         }
         $transaction->getResponseMessage(); //Get Response Message If Available
-        
-        // $transaction->getOrderId(); // Get order id
+        //get important parameters via public methods
+        $transaction->getOrderId(); // Get order id
+        $transaction->getTransactionId(); // Get transaction id
     }
+
+    /**
+     * Paytm Payment Page
+     *
+     * @return Object
+     */
+    public function paytmPurchase()
+    {
+        return view('paytm.payment-page');
+    } 
 }

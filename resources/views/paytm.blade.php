@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Payment using Paytm</title>
+    <title>Payment gateway using Paytm</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 <div class="container" width="500px">
     <div class="panel panel-primary" style="margin-top:110px;">
-        <div class="panel-heading"><h3 class="text-center">Payment  using Paytm Laravel 7</h3></div>
+        <div class="panel-heading"><h3 class="text-center">Payment gateway using Paytm Laravel 7</h3></div>
         <div class="panel-body">
             <form action="{{ route('make.payment') }}" method="POST" enctype="multipart/form-data">
                 {!! csrf_field() !!}
@@ -46,4 +46,5 @@
     </div>
 </div>
 </body>
+
 </html>

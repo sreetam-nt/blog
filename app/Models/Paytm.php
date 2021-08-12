@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Paytm extends Model
 {
     use HasFactory;
-    protected $table = 'paytm';
+    protected $table = 'paytms';
 
     protected $fillable = ['name','mobile','email','status','fee','order_id','transaction_id'];
 }

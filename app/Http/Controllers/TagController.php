@@ -95,7 +95,7 @@ class TagController extends Controller
      */
     public function destroy($id)
     {
-        
+
         $data = Tag::find($id);
         $data->delete();
         return redirect('home');
